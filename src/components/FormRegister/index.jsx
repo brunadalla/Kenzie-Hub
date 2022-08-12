@@ -2,42 +2,14 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import api from '../../services/api.js'
-
-import { ReactComponent as LogoError } from '../../assets/iconError.svg'
-import { ReactComponent as LogoSuccess } from '../../assets/iconSuccess.svg'
-
-import { useNavigate } from 'react-router-dom';
 import { Form } from './styles.js';
 
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext.jsx';
 
 const FormRegister = () => {
 
-    const navigate = useNavigate()
-
-    const notifySuccess = () => toast.success('Conta criada com sucesso!', {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        icon: <LogoSuccess/>
-    });
-
-    const notifyError = () => toast.error('Ops, algo deu errado!', {
-        position: "top-right",
-        autoClose: 50000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        icon: <LogoError/>
-    });
+    const {registerUser} = useContext(UserContext)
 
     const formSchema = yup.object().shape(
         {
@@ -82,25 +54,7 @@ const FormRegister = () => {
         }
     )
 
-    function registerUser({name, email, password, contact, course_module, bio}){
-        
-        const newRequest = {name, email, password, contact, course_module, bio}
-        console.log(newRequest)
-
-        api.post('users', newRequest)
-        .then((res) => {
-
-            console.log(res)
-            notifySuccess()
-
-            setTimeout(() => {
-                navigate('/login', {replace: true})
-            }, '5000')
-            
-        })
-        
-        .catch(() => notifyError())
-    }
+    
 
     return (
         
@@ -203,11 +157,11 @@ const FormRegister = () => {
                     {...register("course_module")}>
 
                     <option value="Primeiro módulo"> Primeiro Módulo </option>
-                    <option value="Segundo módulo"> Segundo Módulo  </option>
+                    <option value="Segundo módulo">  Segundo Módulo  </option>
                     <option value="Terceiro módulo"> Terceiro Módulo </option>
-                    <option value="Quarto módulo"> Quarto Módulo   </option>
-                    <option value="Quinto módulo"> Quinto Módulo   </option>
-                    <option value="Sexto módulo"> Sexto Módulo    </option>
+                    <option value="Quarto módulo">   Quarto Módulo   </option>
+                    <option value="Quinto módulo">   Quinto Módulo   </option>
+                    <option value="Sexto módulo">    Sexto Módulo    </option>
                 </select>
                 {
                      errors.course_module ?
@@ -219,18 +173,6 @@ const FormRegister = () => {
             </div>
 
             <button type='submit'> Cadastrar </button>
-
-            <ToastContainer
-                position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick={false}
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable={false}
-                pauseOnHover={false}
-            />
 
         </Form>
     )

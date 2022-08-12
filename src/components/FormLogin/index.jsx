@@ -2,14 +2,13 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import api from '../../services/api.js'
 import { Form } from './styles.js';
-
-import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext.jsx';
 
 const FormLogin = () => {
 
-    const navigate = useNavigate()
+    const {login} = useContext(UserContext)
 
     const formSchema = yup.object().shape(
         {
@@ -30,18 +29,7 @@ const FormLogin = () => {
         }
     )
 
-    async function login (data){
-
-        const response = await api.post('sessions', data)
-
-        const {token, user} = response.data
-        console.log(user)
-
-        localStorage.setItem('@TOKEN', token)
-        localStorage.setItem('@USERID', user.id)
-        
-        navigate('/', {replace: true})
-    }
+    
 
     return (
 

@@ -78,11 +78,6 @@ export const Form = styled.form`
         background-color: var(--Color-primary-Focus);
     }
 
-    button:disabled {
-        cursor: not-allowed;
-        background-color: var(--Color-primary-Negative);
-    }
-
     .Toastify{
         position: absolute;
     }
@@ -120,20 +115,12 @@ export const Form = styled.form`
 
     .Toastify__toast-icon {
         width: 28px;
-        height: 28px;
-        
+        height: 28px;  
     }
 
     .Toastify__progress-bar {
         height: 6px;
     }
 
-    .Toastify__progress-bar--success {
-        background-color: var(--Success);
-    }
-
-    .Toastify__progress-bar--error {
-        background-color: var(--Negative);
-    }
 
 `

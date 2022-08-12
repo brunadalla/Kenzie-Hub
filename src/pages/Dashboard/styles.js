@@ -93,7 +93,7 @@ export const Home =  styled.div`
             }
         }
 
-        .main-section {
+        .tech-section {
             width: 100%;
             height: max-content;
             padding: 20px 11px;
@@ -131,4 +131,6 @@ export const Home =  styled.div`
             }
         }
     }
+`
+export const TechList = styled.ul`
 `
