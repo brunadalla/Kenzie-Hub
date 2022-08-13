@@ -54,8 +54,6 @@ const FormRegister = () => {
         }
     )
 
-    
-
     return (
         
         <Form onSubmit={handleSubmit(registerUser)}>

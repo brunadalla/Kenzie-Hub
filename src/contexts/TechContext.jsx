@@ -13,7 +13,7 @@ export const TechProvider = ({ children }) => {
     const token = localStorage.getItem('@TOKEN')
 
     const [listTechs, setListTechs] = useState([])
-    const [idTech, setIdTech] = useState('')
+    const [tech, setTech] = useState({})
 
     const [isAddModalVisible, setIsAddModalVisible]   = useState(false)
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
@@ -58,66 +58,75 @@ export const TechProvider = ({ children }) => {
         
     }, [listTechs])
 
-    function createTech({ title, status }) {
+    function createTech( title, status ) {
 
-        const newTech = {title, status}
-
-        axios.request({
+        const createOptions = {
             method: 'POST',
             url: 'https://kenziehub.herokuapp.com/users/techs',
             headers: {
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${token} `
-            }
-        }, newTech)
+            },
+            data: {title, status}
+        }
+
+        axios.request(createOptions)
         .then(() => {
             notifySuccess()
             setIsAddModalVisible(false)
         })
-        .catch(() => notifyError())
+        .catch((err) => {
+            console.log(err)
+            notifyError()})
     }
 
-    function editTech({ title, status }, techId) {
+    function editTech( status ) {
 
-        const updateTech = {}
+        console.log(status)
 
-        if (title) {
-            updateTech.title = title
-        } else if (status) {
-            updateTech.status = status
+        const updateOptions = {
+            method: 'PUT',
+            url: `https://kenziehub.herokuapp.com/users/techs/${tech.id}`,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token} `
+            },
+            data: {status}
         }
-
-        if (Object.keys(updateTech).length !== 0) {
-            axios.request({
-                method: 'PUT',
-                url: `https://kenziehub.herokuapp.com/users/techs/${techId}`,
-                headers: {
-                    Authorization: `Bearer ${token} `
-                }
-            }, updateTech)
+            axios.request(updateOptions)
             .then(() => {
                 notifySuccess()
                 setIsEditModalVisible(false)
             })
-            .catch(() => notifyError())
-        }
+            .catch((err) => {
+                console.log(err)
+                notifyError()
+            })
     }
 
-    function deleteTech(techId) {
-      
-        axios.request({
+    function deleteTech() {
+
+        const deleteOptions = {
             method: 'DELETE',
-            url: `https://kenziehub.herokuapp.com/users/techs/${techId}`,
+            url: `https://kenziehub.herokuapp.com/users/techs/${tech.id}`,
             headers: {
               Authorization: `Bearer ${token} `
             }
-        })
+        }
+      
+        axios.request(deleteOptions)
         .then(() => {
             notifySuccess()
+            setIsEditModalVisible(false)
+        })
+        .catch((err) => {
+            console.log(err)
+            notifyError()
         })
     }
 
     return (
-        <TechContext.Provider value={{ listTechs, setListTechs, isAddModalVisible, setIsAddModalVisible, isEditModalVisible, setIsEditModalVisible, createTech, editTech, deleteTech }}>
+        <TechContext.Provider value={{ listTechs, setListTechs, isAddModalVisible, setIsAddModalVisible, isEditModalVisible, setIsEditModalVisible, createTech, editTech, deleteTech, tech, setTech }}>
             {children}
         </TechContext.Provider>
     );

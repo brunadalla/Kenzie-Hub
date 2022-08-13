@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
 
     const notifySuccess = () => toast.success('Conta criada com sucesso!', {
         position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: false,
@@ -42,7 +42,7 @@ export const UserProvider = ({ children }) => {
 
     const notifySuccessLogin = () => toast.success('Login realizado com sucesso!', {
         position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: false,
@@ -54,7 +54,7 @@ export const UserProvider = ({ children }) => {
 
     const notifyError = () => toast.error('Ops, algo deu errado!', {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: false,
@@ -68,7 +68,6 @@ export const UserProvider = ({ children }) => {
         if (token) {
             axios.request(options)
             .then((res) => {
-            console.log(res.data)
             setUserInfo(res.data)
             })
            .catch(err => {
@@ -88,7 +87,9 @@ export const UserProvider = ({ children }) => {
             localStorage.setItem('@USERID', user.id)
 
             notifySuccessLogin()
-            setTimeout(navigate('/', {replace: true}), 3000)
+            setTimeout(() => {
+                navigate('/', {replace: true})
+            }, '2000')
         })
         .catch(() => notifyError())   
     }
@@ -101,7 +102,9 @@ export const UserProvider = ({ children }) => {
         api.post('users', newRequest)
         .then(() => {
             notifySuccess()
-            setTimeout(navigate('/login', {replace: true}), 3000)
+            setTimeout(() => {
+                navigate('/login', {replace: true})
+            }, '2000')
         })
         .catch(() => notifyError())
     }

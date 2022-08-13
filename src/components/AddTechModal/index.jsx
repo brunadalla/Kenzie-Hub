@@ -3,8 +3,12 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { ModalContainer } from "./styles"
+import { useContext } from 'react';
+import { TechContext } from '../../contexts/TechContext';
 
 const AddTechModal = () => {
+
+    const {setIsAddModalVisible, createTech, isAddModalVisible} = useContext(TechContext)
 
     const formSchema = yup.object().shape(
         {
@@ -24,20 +28,28 @@ const AddTechModal = () => {
         }
     )
 
+    function closeModal() {
+        setIsAddModalVisible(false)
+    }
+
+    function addTech(data) {
+       createTech(data.techTitle, data.techStatus)
+    }
+
     return (
 
-        <ModalContainer >
+        <ModalContainer isAddModalVisible={isAddModalVisible}>
 
             <div className="modal">
 
-                <header>
+                <header className="modal-header">
 
                     <strong>Cadastrar Tecnologia</strong>
-                    <button></button>
+                    <button onClick={() => closeModal()}> X </button>
 
                 </header>
 
-                <form onSubmit={handleSubmit()}>
+                <form onSubmit={handleSubmit(addTech)}>
 
                     <div>
 

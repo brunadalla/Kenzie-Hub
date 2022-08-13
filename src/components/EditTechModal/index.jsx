@@ -2,25 +2,18 @@ import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { ModalContainer } from "./styles"
-import { useContext, useState } from 'react';
+import { ModalContainerEdit } from "./styles"
+import { useContext } from 'react';
 import { TechContext } from '../../contexts/TechContext';
 
 const EditTechModal = () => {
 
-    const {listTechs, idTech} =  useContext(TechContext)
-
-    const tech = listTechs.find(tech => tech.id === idTech)
+    const {isEditModalVisible, setIsEditModalVisible, deleteTech, tech, editTech} =  useContext(TechContext)
 
     const formSchema = yup.object().shape(
         {
-            techTitle: yup
-            .string()
-            .required('Nome da tecnologia obrigatório'),
-
             techStatus: yup
             .string()
-            .required('Status da tecnologia necessário')
         }
     )
 
@@ -30,37 +23,32 @@ const EditTechModal = () => {
         }
     )
 
+    function updateTech(data) {
+        editTech(data.techStatus)
+     }
+
+    function closeModal() {
+        setIsEditModalVisible(false)
+    }
+
     return (
 
-        <ModalContainer >
+        <ModalContainerEdit isEditModalVisible={isEditModalVisible}>
 
             <div className="modal">
 
-                <header>
+                <header className='modal-header'>
 
                     <strong>Tecnologia Detalhes</strong>
-                    <button></button>
+                    <button onClick={() => closeModal()}>X</button>
 
                 </header>
 
-                <form onSubmit={handleSubmit()}>
+                <form onSubmit={handleSubmit(updateTech)}>
 
                     <div>
-
-                        <label htmlFor="tech-name">Nome do Projeto</label>
-                        <input 
-                            type="text" 
-                            id="tech-name" 
-                            placeholder={tech.title}
-                            {...register('techTitle')}
-                        />
-                        {
-                            errors.techTitle ?
-                                <p>{errors.techTitle.message}</p>
-                            :
-                                <p></p>
-                        }
-
+                        <span> Nome do Projeto </span>
+                        <p className='projectName'>{tech.title}</p>
                     </div>
 
                     <div>
@@ -68,7 +56,6 @@ const EditTechModal = () => {
                         <label htmlFor="select-status">Selecionar status</label>
                         <select 
                             id="select-status"
-                            placeholder={tech.status}
                             {...register('techStatus')}
                         >
                             <option value="Iniciante">     Iniciante     </option>
@@ -86,15 +73,15 @@ const EditTechModal = () => {
 
                     <div className='tech-btns'>
 
-                        <button type='submit'> Salvar alterações </button>
-                        <button> Excluir </button>
+                        <button className='tech-save' type='submit'> Salvar alterações </button>
+                        <button className='tech-delete' type='button' onClick={() => {deleteTech()}}> Excluir </button>
                     </div>
 
                 </form>
 
             </div>
 
-        </ModalContainer>
+        </ModalContainerEdit>
     )
 }
 
