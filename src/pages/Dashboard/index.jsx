@@ -107,12 +107,12 @@ const Dashboard = () => {
                                     }
                                 </TechList>
                             :   
-                                <>
+                                <div className="empty-listTechs">
                                 
                                     <strong>Sua Lista de Tecnologias está vazia</strong>
                                     <p>Clique no botão de  +  para adicionar</p>
                             
-                                </>
+                                </div>
 
                         }
 

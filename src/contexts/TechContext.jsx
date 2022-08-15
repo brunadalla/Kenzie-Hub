@@ -19,8 +19,8 @@ export const TechProvider = ({ children }) => {
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
 
     const notifySuccess = () => toast.success('Requisição realizada com sucesso!', {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000,
+        position: window.matchMedia("(min-width:769px)").matches ? "top-right" : "top-center",
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: false,
@@ -31,8 +31,8 @@ export const TechProvider = ({ children }) => {
     });
 
     const notifyError = () => toast.error('Ops, algo deu errado!', {
-        position: "top-right",
-        autoClose: 3000,
+        position: window.matchMedia("(min-width:769px)").matches ? "top-right" : "top-center",
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: false,

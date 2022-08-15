@@ -5,7 +5,6 @@ import logo from '../../assets/Logo.svg'
 
 import { RegisterForm } from "./styles"
 
-
 const Register = () => {
 
     const navigate = useNavigate()
@@ -37,6 +36,7 @@ const Register = () => {
             </main>
 
         </RegisterForm>
+        
     )
 }
 

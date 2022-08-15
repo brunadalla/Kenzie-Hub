@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
       };
 
     const notifySuccess = () => toast.success('Conta criada com sucesso!', {
-        position: toast.POSITION.TOP_RIGHT,
+        position: window.matchMedia("(min-width:769px)").matches ? "top-right" : "top-center",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,
@@ -37,11 +37,11 @@ export const UserProvider = ({ children }) => {
         draggable: false,
         progress: undefined,
         icon: <LogoSuccess/>,
-        theme: "dark"
+        theme: "dark",
     });
 
     const notifySuccessLogin = () => toast.success('Login realizado com sucesso!', {
-        position: toast.POSITION.TOP_RIGHT,
+        position: window.matchMedia("(min-width:769px)").matches ? "top-right" : "top-center",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,
@@ -53,7 +53,7 @@ export const UserProvider = ({ children }) => {
     });
 
     const notifyError = () => toast.error('Ops, algo deu errado!', {
-        position: "top-right",
+        position: window.matchMedia("(min-width:769px)").matches ? "top-right" : "top-center",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: false,

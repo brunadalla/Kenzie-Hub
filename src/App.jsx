@@ -14,7 +14,7 @@ function App() {
         <GlobalStyle/>
         <RoutesMain/>
         <ToastContainer
-                position="top-right"
+                position={window.matchMedia("(min-width:769px)").matches ? "top-right" : "top-center"}
                 autoClose={3000}
                 hideProgressBar={false}
                 newestOnTop={false}
