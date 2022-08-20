@@ -1,20 +1,62 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import api from "../services/api";
 
 import { toast } from 'react-toastify';
-import { ReactComponent as LogoError } from '../assets/iconError.svg'
-import { ReactComponent as LogoSuccess } from '../assets/iconSuccess.svg'
+
+import IconSuccess from "../components/Icons/IconSuccess.jsx";
+import IconError from "../components/Icons/IconError.jsx";
 
 import axios from "axios";
+import { ITech } from "./TechContext";
 
-export const UserContext =  createContext()
+export interface IResponseData {
+    email: string,
+    password: string
+}
 
-export const UserProvider = ({ children }) => {
+interface IUserInfo {
+    id: string,
+    name: string,
+    email: string,
+    course_module: string,
+    bio: string,
+    contact: string,
+    techs: ITech[],
+    works?: string[],
+    created_at: string,
+    updated_at: string,
+    avatar_url: null
+}
 
-    const [userInfo, setUserInfo] = useState({})
+interface IRegisterUser {
+    name: string,
+    email: string,
+    password: string,
+    course_module: string,
+    bio: string,
+    contact: string,
+}
+
+interface IUserProviderProps {
+    children: ReactNode;
+}
+
+interface ICreateContext {
+    login: (value: IResponseData) => void,
+    registerUser: (data: IRegisterUser) => void,
+    userInfo: IUserInfo,
+    setUserInfo: Dispatch<SetStateAction<IUserInfo>>,
+    token: string | null
+}
+
+export const UserContext =  createContext<ICreateContext>({} as ICreateContext)
+
+export const UserProvider = ({ children }: IUserProviderProps) => {
+
+    const [userInfo, setUserInfo] = useState<IUserInfo>({} as IUserInfo)
 
     const navigate = useNavigate()
 
@@ -36,7 +78,7 @@ export const UserProvider = ({ children }) => {
         pauseOnHover: false,
         draggable: false,
         progress: undefined,
-        icon: <LogoSuccess/>,
+        icon: <IconSuccess/>,
         theme: "dark",
     });
 
@@ -48,7 +90,7 @@ export const UserProvider = ({ children }) => {
         pauseOnHover: false,
         draggable: false,
         progress: undefined,
-        icon: <LogoSuccess/>,
+        icon: <IconSuccess/>,
         theme: "dark"
     });
 
@@ -60,7 +102,7 @@ export const UserProvider = ({ children }) => {
         pauseOnHover: false,
         draggable: false,
         progress: undefined,
-        icon: <LogoError/>,
+        icon: <IconError/>,
         theme: "dark"
     });
 
@@ -77,7 +119,7 @@ export const UserProvider = ({ children }) => {
         }
     }, [])
 
-     function login (data){
+     function login(data: IResponseData){
 
         api.post('sessions', data)
         .then((res) => {
@@ -89,13 +131,13 @@ export const UserProvider = ({ children }) => {
             notifySuccessLogin()
             setTimeout(() => {
                 navigate('/', {replace: true})
-            }, '2000')
+            }, 2000)
         })
         .catch(() => notifyError())   
     }
 
    
-    function registerUser({name, email, password, contact, course_module, bio}){
+    function registerUser({name, email, password, contact, course_module, bio}: IRegisterUser){
         
         const newRequest = {name, email, password, contact, course_module, bio}
 
@@ -104,7 +146,7 @@ export const UserProvider = ({ children }) => {
             notifySuccess()
             setTimeout(() => {
                 navigate('/login', {replace: true})
-            }, '2000')
+            }, 2000)
         })
         .catch(() => notifyError())
     }

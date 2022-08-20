@@ -2,10 +2,20 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Form } from './styles.js';
+import { Form } from './styles';
 
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext.jsx';
+import { UserContext } from '../../contexts/UserContext';
+
+interface IRegister {
+    name: string,
+    email: string,
+    password: string,
+    confirm_password: string,
+    course_module: string,
+    bio: string,
+    contact: string,
+}
 
 const FormRegister = () => {
 
@@ -28,8 +38,7 @@ const FormRegister = () => {
             .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/, 'A senha deve ter no mínimo 8 caracteres. Necessário ter letras, números e ao menos um símbolo')
             .required("Senha obrigatória"),
             
-
-            confirmPassword: yup
+            confirm_password: yup
             .string()
             .oneOf([yup.ref('password'), null], 'As senhas não combinam')
             .required("Confirme sua senha"),
@@ -48,7 +57,7 @@ const FormRegister = () => {
         }
     )
 
-    const {register, handleSubmit, formState: {errors}} = useForm(
+    const {register, handleSubmit, formState: {errors}} = useForm<IRegister>(
         {
             resolver: yupResolver(formSchema)
         }
@@ -104,15 +113,15 @@ const FormRegister = () => {
             </div>
 
             <div className='container-input'>
-                <label htmlFor="confirmPassword"> Confirmar senha </label>
+                <label htmlFor="confirm_password"> Confirmar senha </label>
                 <input 
-                    id='confirmPassword' 
+                    id='confirm_password' 
                     type="password" 
                     placeholder="Confime sua senha" 
-                    {...register("confirmPassword")}/>
+                    {...register("confirm_password")}/>
                 {
-                     errors.confirmPassword ?
-                        <p>{errors.confirmPassword.message}</p>
+                     errors.confirm_password ?
+                        <p>{errors.confirm_password.message}</p>
                      :
                         <p></p>
                 }

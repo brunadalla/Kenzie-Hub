@@ -16,11 +16,6 @@ export const LoginForm = styled.div`
     flex-direction: column;
     justify-content: space-between;
 
-    img {
-        height: 4%;
-        max-height: 20px;
-    }
-
     main {
         width: 90%;
         height: 90%;

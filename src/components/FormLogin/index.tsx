@@ -2,9 +2,9 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Form } from './styles.js';
+import { Form } from './styles';
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext.jsx';
+import { IResponseData, UserContext } from '../../contexts/UserContext';
 
 const FormLogin = () => {
 
@@ -23,7 +23,7 @@ const FormLogin = () => {
         }
     )
 
-    const {register, handleSubmit, formState: {errors}} = useForm(
+    const {register, handleSubmit, formState: {errors}} = useForm<IResponseData>(
         {
             resolver: yupResolver(formSchema)
         }

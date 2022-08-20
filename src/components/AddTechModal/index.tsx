@@ -4,7 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { ModalContainer } from "./styles"
 import { useContext } from 'react';
-import { TechContext } from '../../contexts/TechContext';
+import { ITech, TechContext } from '../../contexts/TechContext';
+
+export type IAddTech = Omit<ITech, 'id'>
 
 const AddTechModal = () => {
 
@@ -22,7 +24,7 @@ const AddTechModal = () => {
         }
     )
 
-    const {register, handleSubmit, formState: {errors}} = useForm(
+    const {register, handleSubmit, formState: {errors}} = useForm<IAddTech>(
         {
             resolver: yupResolver(formSchema)
         }
@@ -32,8 +34,8 @@ const AddTechModal = () => {
         setIsAddModalVisible(false)
     }
 
-    function addTech(data) {
-       createTech(data.techTitle, data.techStatus)
+    function addTech(data: IAddTech) {
+       createTech(data.title, data.status)
     }
 
     return (
@@ -58,11 +60,11 @@ const AddTechModal = () => {
                             type="text" 
                             id="tech-name" 
                             placeholder='Digite o nome da tecnologia aqui'
-                            {...register('techTitle')}
+                            {...register('title')}
                         />
                         {
-                            errors.techTitle ?
-                                <p>{errors.techTitle.message}</p>
+                            errors.title ?
+                                <p>{errors.title.message}</p>
                             :
                                 <p></p>
                         }
@@ -74,15 +76,15 @@ const AddTechModal = () => {
                         <label htmlFor="select-status">Selecionar status</label>
                         <select 
                             id="select-status"
-                            {...register('techStatus')}
+                            {...register('status')}
                         >
                             <option value="Iniciante">     Iniciante     </option>
                             <option value="Intermediário"> Intermediário </option>
                             <option value="Avançado">      Avançado      </option>
                         </select>
                         {
-                            errors.techStatus ?
-                                <p>{errors.techStatus.message}</p>
+                            errors.status ?
+                                <p>{errors.status.message}</p>
                             :
                                 <p></p>
                         }

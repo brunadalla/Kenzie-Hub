@@ -1,19 +1,47 @@
 import axios from "axios"
-import { createContext, useEffect, useState } from "react"
+
+import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react"
 
 import { toast } from 'react-toastify';
-import { ReactComponent as LogoError } from '../assets/iconError.svg'
-import { ReactComponent as LogoSuccess } from '../assets/iconSuccess.svg'
 
+import IconSuccess from "../components/Icons/IconSuccess.jsx";
+import IconError from "../components/Icons/IconError.jsx";
 
-export const TechContext =  createContext()
+export interface ITech {
+    id: string;
+    title: string,
+    status: string
+}
 
-export const TechProvider = ({ children }) => {
+interface ITechProviderProps {
+    children: ReactNode;
+}
+
+interface ITechContextData {
+    tech: ITech,
+    setTech: Dispatch<SetStateAction<ITech>>,
+    createTech: (title: string, status: string) => void,
+    editTech: (status: string) => void,
+    deleteTech: () => void,
+
+    listTechs: ITech[],
+    setListTechs: Dispatch<SetStateAction<ITech[]>>
+
+    isAddModalVisible: boolean,
+    setIsAddModalVisible: Dispatch<SetStateAction<boolean>>,
+
+    isEditModalVisible: boolean,
+    setIsEditModalVisible: Dispatch<SetStateAction<boolean>>     
+}
+
+export const TechContext =  createContext<ITechContextData>({} as ITechContextData)
+
+export const TechProvider = ({ children }: ITechProviderProps) => {
 
     const token = localStorage.getItem('@TOKEN')
 
-    const [listTechs, setListTechs] = useState([])
-    const [tech, setTech] = useState({})
+    const [listTechs, setListTechs] = useState<ITech[]>([])
+    const [tech, setTech] = useState<ITech>({} as ITech)
 
     const [isAddModalVisible, setIsAddModalVisible]   = useState(false)
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
@@ -26,7 +54,7 @@ export const TechProvider = ({ children }) => {
         pauseOnHover: false,
         draggable: false,
         progress: undefined,
-        icon: <LogoSuccess/>,
+        icon: <IconSuccess/>,
         theme: "dark"
     });
 
@@ -38,7 +66,7 @@ export const TechProvider = ({ children }) => {
         pauseOnHover: false,
         draggable: false,
         progress: undefined,
-        icon: <LogoError/>,
+        icon: <IconError/>,
         theme: "dark"
     });
 
@@ -58,7 +86,7 @@ export const TechProvider = ({ children }) => {
         
     }, [listTechs])
 
-    function createTech( title, status ) {
+    function createTech( title: string, status: string ) {
 
         const createOptions = {
             method: 'POST',
@@ -80,7 +108,7 @@ export const TechProvider = ({ children }) => {
             notifyError()})
     }
 
-    function editTech( status ) {
+    function editTech( status: string ) {
 
         console.log(status)
 

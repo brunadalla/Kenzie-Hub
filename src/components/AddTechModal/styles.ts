@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
-export const ModalContainer = styled.div`
+interface IModalContainerProps {
+    isAddModalVisible: boolean
+}
+
+export const ModalContainer = styled.div<IModalContainerProps>`
 
     width: 100%;
     height: 100%;
 
-    display: ${props => props.isAddModalVisible === true ? 'flex' : 'none'};
+    display: ${({isAddModalVisible}) => isAddModalVisible === true ? 'flex' : 'none'};
     justify-content:center;
 
     position: absolute;

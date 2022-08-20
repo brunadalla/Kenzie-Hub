@@ -2,10 +2,10 @@ import { useContext } from "react"
 
 import { useNavigate, Navigate } from "react-router-dom"
 
-import logo from '../../assets/Logo.svg'
+import Logo from "../../components/Icons/Logo"
+import IconAdd from "../../components/Icons/IconAdd"
+import IconInfo from "../../components/Icons/IconInfo"
 
-import {ReactComponent as AddIcon} from '../../assets/addIcon.svg'
-import {ReactComponent as InfoIcon} from '../../assets/infoIcon.svg' 
 import { Home, TechList } from "./styles"
 
 import { UserContext } from "../../contexts/UserContext"
@@ -40,7 +40,7 @@ const Dashboard = () => {
 
                     <div>
 
-                        <img src={logo} alt="logo" />
+                        <Logo/>
                         <button onClick={() => handleLogout()}> Sair </button>
 
                     </div>
@@ -71,7 +71,7 @@ const Dashboard = () => {
 
                             <h3>Tecnologias</h3>
                             <button onClick={() => setIsAddModalVisible(true)}>
-                                <AddIcon/>
+                                <IconAdd/>
                             </button>
 
                         </header>
@@ -97,7 +97,7 @@ const Dashboard = () => {
                                                             setIsEditModalVisible(true)
                                                         }}
                                                         >
-                                                        <InfoIcon size='100%'/>
+                                                        <IconInfo/>
                                                     </button>
                                                     
                                                 </div>

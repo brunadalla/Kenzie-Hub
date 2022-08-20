@@ -28,11 +28,6 @@ export const RegisterForm = styled.div`
         align-items: center;
         justify-content: space-between;
 
-        img {
-            height: 3vh;
-            max-height: 20px;
-        }
-
         button {
             width: 30%;
             height: 100%;

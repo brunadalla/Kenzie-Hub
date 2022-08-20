@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 import FormRegister from "../../components/FormRegister"
-import logo from '../../assets/Logo.svg'
+import Logo from "../../components/Icons/Logo.jsx"
 
 import { RegisterForm } from "./styles"
 
@@ -19,7 +19,7 @@ const Register = () => {
 
             <header>
 
-                <img src={logo} alt="Logo" />
+                <Logo/>
                 <button onClick={() => btnReturn()}>Voltar</button>
 
             </header>

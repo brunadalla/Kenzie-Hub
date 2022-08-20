@@ -5,6 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ModalContainerEdit } from "./styles"
 import { useContext } from 'react';
 import { TechContext } from '../../contexts/TechContext';
+import { IAddTech } from '../AddTechModal';
+
+type IEditTech = Omit<IAddTech, 'title'>
 
 const EditTechModal = () => {
 
@@ -17,14 +20,14 @@ const EditTechModal = () => {
         }
     )
 
-    const {register, handleSubmit, formState: {errors}} = useForm(
+    const {register, handleSubmit, formState: {errors}} = useForm<IEditTech>(
         {
             resolver: yupResolver(formSchema)
         }
     )
 
-    function updateTech(data) {
-        editTech(data.techStatus)
+    function updateTech(data: IEditTech) {
+        editTech(data.status)
      }
 
     function closeModal() {
@@ -56,15 +59,15 @@ const EditTechModal = () => {
                         <label htmlFor="select-status">Selecionar status</label>
                         <select 
                             id="select-status"
-                            {...register('techStatus')}
+                            {...register('status')}
                         >
                             <option value="Iniciante">     Iniciante     </option>
                             <option value="Intermediário"> Intermediário </option>
                             <option value="Avançado">      Avançado      </option>
                         </select>
                         {
-                            errors.techStatus ?
-                                <p>{errors.techStatus.message}</p>
+                            errors.status ?
+                                <p>{errors.status.message}</p>
                             :
                                 <p></p>
                         }

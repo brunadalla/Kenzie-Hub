@@ -25,9 +25,9 @@ const GlobalStyle = createGlobalStyle`
         --Success: #3FE864;
         --Negative: #E83F5B;
 
-        --toastify-color-error:#E83F5B;
+        --toastify-color-error: #E83F5B;
         --toastify-color-success: #3FE864;
-        --toastify-color-dark: #121214;
+        --toastify-color-dark:  #121214;
     };
 `
 export default GlobalStyle 

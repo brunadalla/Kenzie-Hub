@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-export const ModalContainerEdit = styled.div`
+interface IModalContainerEditProps {
+    isEditModalVisible: boolean
+}
+
+export const ModalContainerEdit = styled.div<IModalContainerEditProps>`
     width: 100%;
     height: 100%;
 
-    display: ${props => props.isEditModalVisible === true ? 'flex' : 'none'};
+    display: ${({isEditModalVisible}) => isEditModalVisible === true ? 'flex' : 'none'};
     justify-content:center;
 
     position: absolute;
