@@ -7,7 +7,7 @@ import Register from "../pages/Register";
 const RoutesMain = () => {
     return (
         <Routes>
-            <Route path="/" element={<Dashboard/>}/>
+            <Route path="/"          element={<Dashboard/>}/>
             <Route path="/register"  element={<Register/>}/>
             <Route path="/login"     element={<Login/>}/>
             <Route path="*"          element={<Navigate replace to='/'/>}/>

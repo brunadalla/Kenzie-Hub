@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 import FormRegister from "../../components/FormRegister"
-import Logo from "../../components/Icons/Logo.jsx"
+import Logo from "../../components/Icons/Logo"
 
 import { RegisterForm } from "./styles"
 

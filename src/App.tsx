@@ -2,7 +2,7 @@ import './App.css';
 import 'react-toastify/dist/ReactToastify.css'
 import GlobalStyle from './styles/Global';
 
-import RoutesMain from './routes';
+import RoutesMain from './routes/index';
 
 import { ToastContainer } from 'react-toastify';
 

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import FormLogin from "../../components/FormLogin"
 
-import Logo from "../../components/Icons/Logo.jsx"
+import Logo from "../../components/Icons/Logo"
 
 import { LoginForm } from "./styles"
 

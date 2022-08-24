@@ -4,8 +4,8 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState
 
 import { toast } from 'react-toastify';
 
-import IconSuccess from "../components/Icons/IconSuccess.jsx";
-import IconError from "../components/Icons/IconError.jsx";
+import IconSuccess from "../components/Icons/IconSuccess";
+import IconError from "../components/Icons/IconError";
 
 export interface ITech {
     id: string;
