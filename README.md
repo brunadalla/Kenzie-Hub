@@ -43,4 +43,4 @@ Aspectos técnicos/ funcionalidades:
 4. Possibilidade de exclusão de determinada tecnologia;
 5. Presença de um toast de erro quando necessário.
 
-**https://hamburgueria-da-kenzie-red.vercel.app/**
+**https://react-entrega-s2-formulario-de-cadastro-bruna-dalla.vercel.app/login**
