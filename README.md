@@ -1,4 +1,7 @@
-esse projeto é praticar os conceitos de **React** e **TypeScript**, desenvolvendo uma aplicação que simula um hub de portfólios de programadores.
+## Kenzie Hub
+Projeto realizado no terceiro módulo do curso de **Formação em Desenvolvimento Full Stack da Kenzie Academy Brasil**
+
+A ideia desse projeto é praticar os conceitos de **React** e **TypeScript**, desenvolvendo uma aplicação que simula um hub de portfólios de programadores.
 
 Bibliotecas React utilizadas:
 - **React Hook Form**;
@@ -39,3 +42,5 @@ Aspectos técnicos/ funcionalidades:
 3. Criação e listagem das tecnologias do usuário logado;
 4. Possibilidade de exclusão de determinada tecnologia;
 5. Presença de um toast de erro quando necessário.
+
+**https://hamburgueria-da-kenzie-red.vercel.app/**
